@@ -1,0 +1,26 @@
+<%- include("../partial/header") %>
+<%- include("../partial/navbar") %>
+
+<div class="container mt-4">
+  <h2>Admin Dashboard</h2>
+
+  <div class="row mt-4">
+    <div class="col-md-4">
+      <div class="card text-center p-3 shadow-sm">
+        <h4>Total Categories</h4>
+        <p class="fs-3"><%= categoriesCount %></p>
+        <a href="/admin/categories" class="btn btn-primary btn-sm">Manage</a>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card text-center p-3 shadow-sm">
+        <h4>Total Products</h4>
+        <p class="fs-3"><%= productsCount %></p>
+        <a href="/admin/products" class="btn btn-primary btn-sm">Manage</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("../partial/footer") %>

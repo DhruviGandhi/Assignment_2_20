@@ -1,0 +1,25 @@
+<!-- frontend/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Advice Generator</title>
+</head>
+<body>
+  <h1> Random Advice Generator</h1>
+  <button id="getAdvice">Get Advice</button>
+  <p id="advice"></p>
+
+  <script>
+    document.getElementById("getAdvice").addEventListener("click", async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/advice");
+        const data = await res.json();
+        document.getElementById("advice").innerText = `"${data.advice}"`;
+      } catch (err) {
+        document.getElementById("advice").innerText = "Error fetching advice!";
+      }
+    });
+  </script>
+</body>
+</html>

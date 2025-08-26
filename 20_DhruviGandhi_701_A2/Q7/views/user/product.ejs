@@ -1,0 +1,21 @@
+<%- include("../partial/header") %>
+<%- include("../partial/navbar") %>
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-5">
+      <img src="<%= product.image %>" class="img-fluid rounded shadow-sm" alt="<%= product.name %>">
+    </div>
+    <div class="col-md-7">
+      <h2><%= product.name %></h2>
+      <p class="text-muted">Category: <%= product.category ? product.category.name : "None" %></p>
+      <h4 class="text-success">$<%= product.price %></h4>
+      <p><%= product.description %></p>
+      <p><strong>Stock:</strong> <%= product.stock %> available</p>
+
+      <a href="/cart/add/<%= product._id %>" class="btn btn-success">Add to Cart</a>
+    </div>
+  </div>
+</div>
+
+<%- include("../partial/footer") %>

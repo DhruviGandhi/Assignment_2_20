@@ -1,0 +1,50 @@
+<%- include("../partial/header") %>
+<%- include("../partial/navbar") %>
+
+<div class="container mt-4">
+  <h2>Manage Categories</h2>
+
+  <!-- Add Category Form -->
+  <form action="/admin/categories" method="POST" class="mb-4">
+    <div class="mb-3">
+      <label class="form-label">Category Name</label>
+      <input type="text" name="name" class="form-control" required />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Parent Category (optional)</label>
+      <select name="parent" class="form-control">
+        <option value="">-- None --</option>
+        <% categories.forEach(cat => { %>
+          <% if (!cat.parent) { %> <!-- only parent categories -->
+            <option value="<%= cat._id %>"><%= cat.name %></option>
+          <% } %>
+        <% }) %>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Category</button>
+  </form>
+
+  <!-- Categories Table -->
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Parent</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% categories.forEach(cat => { %>
+        <tr>
+          <td><%= cat.name %></td>
+          <td><%= cat.parent ? cat.parent.name : "None" %></td>
+          <td>
+            <a href="/admin/categories/delete/<%= cat._id %>" class="btn btn-danger btn-sm">Delete</a>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include("../partial/footer") %>

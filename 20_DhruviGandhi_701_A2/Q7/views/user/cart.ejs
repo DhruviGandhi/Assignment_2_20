@@ -1,0 +1,54 @@
+<%- include("../partial/header") %>
+<%- include("../partial/navbar") %>
+
+<div class="container mt-4">
+  <h2>Your Cart</h2>
+
+  <% if (cart.length === 0) { %>
+    <p>Your cart is empty.</p>
+    <a href="/" class="btn btn-primary">Continue Shopping</a>
+  <% } else { %>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% let grandTotal = 0; %>
+        <% cart.forEach(item => { 
+             let total = item.product.price * item.qty;
+             grandTotal += total;
+        %>
+          <tr>
+            <td><%= item.product.name %></td>
+            <td>$<%= item.product.price %></td>
+            <td>
+              <form action="/cart/update/<%= item.product._id %>" method="POST" class="d-flex">
+                <input type="number" name="qty" value="<%= item.qty %>" min="1" class="form-control form-control-sm me-2" style="width:70px;">
+                <button type="submit" class="btn btn-sm btn-primary">Update</button>
+              </form>
+            </td>
+            <td>$<%= total %></td>
+            <td>
+              <a href="/cart/remove/<%= item.product._id %>" class="btn btn-danger btn-sm">Remove</a>
+            </td>
+          </tr>
+        <% }) %>
+        <tr>
+          <td colspan="3" class="text-end"><strong>Grand Total:</strong></td>
+          <td colspan="2"><strong>$<%= grandTotal %></strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <a href="/" class="btn btn-secondary">Continue Shopping</a>
+    <a href="#" class="btn btn-success">Checkout</a>
+  <% } %>
+</div>
+
+<%- include("../partial/footer") %>
